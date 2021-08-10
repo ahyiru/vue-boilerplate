@@ -1,0 +1,91 @@
+@green:#6ce581;
+@red:#ff3e38;
+@yellow:#fecb2e;
+@blue:#318ffa;
+
+@size:3rem;
+@thickness:.6rem;
+@lat:((@size - @thickness) / 2);
+@offset:(@lat - @thickness);
+
+@keyframes before{
+  0%{
+    width:@thickness;
+    box-shadow:@lat (-@offset) @red,(-@lat) @offset @blue;
+  }
+  35%{
+    width:@size;
+    box-shadow:0 (-@offset) @red,0 @offset @blue;
+  }
+  70%{
+    width:@thickness;
+    box-shadow:(-@lat) (-@offset) @red,@lat @offset @blue;
+  }
+  100%{
+    box-shadow:@lat (-@offset) @red,(-@lat) @offset @blue;
+  }
+}
+@keyframes after{
+  0%{
+    height:@thickness;
+    box-shadow:@offset @lat @green,(-@offset) (-@lat) @yellow;
+  }
+  35%{
+    height:@size;
+    box-shadow:@offset 0 @green,(-@offset) 0 @yellow;
+  }
+  70%{
+    height:@thickness;
+    box-shadow:@offset (-@lat) @green,(-@offset) @lat @yellow;
+  }
+  100%{
+    box-shadow:@offset @lat @green,(-@offset) (-@lat) @yellow;
+  }
+}
+.spinner{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  pointer-events:auto;
+  min-height:100px;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:10000;
+  background-color:hsla(0,0%,72%,.24);
+  &.global{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+  }
+  .spinning{
+    width:@size;
+    height:@size;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) rotate(165deg);
+    margin:0;
+    &::before,&::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      left:50%;
+      display:block;
+      width:@thickness;
+      height:@thickness;
+      border-radius:(@thickness / 2);
+      transform:translate(-50%,-50%);
+    }
+    &::before{
+      animation:before 1.5s infinite;
+    }
+    &::after{
+      animation:after 1.5s infinite;
+    }
+  }
+}
+
+
+
