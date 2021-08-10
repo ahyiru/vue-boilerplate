@@ -6,9 +6,11 @@ import Link from './components/link';
 
 import useStore,{defStore as store} from '../useStore';
 
-import {routers as menu} from '@app/router';
+import {routes} from '@app/routers/staticRouter';
 
-const current=[];
+import formatMenu from './utils/formatMenu';
+
+const menu=formatMenu(routes);
 
 export {
   MainTop,
@@ -19,6 +21,5 @@ export {
   store,
   useStore,
   menu,
-  current,
 };
 

@@ -32,7 +32,6 @@ const postcssOptions={
   // autoprefixer: { grid: true }
   browsers: 'last 2 versions',
   importFrom:[
-    // './playground/src/layoutOpt/global.css',
     // './configs/themeCfg.js',
     ()=>{
       const environmentVariables={
@@ -51,7 +50,6 @@ const plugins=[
   }),
   new webpack.DefinePlugin({
     'process.env':{
-      // NODE_ENV:JSON.stringify('production'),
       isDev:false,
     },
     EMAIL:JSON.stringify('ah.yiru@gmail.com'),
@@ -177,12 +175,6 @@ const prodConfig=merge(webpackConfig, {
                 plugins:()=>[
                   postcssPresetEnv(postcssOptions),
                 ],
-                /* plugins:[
-                  'postcss-preset-env',
-                  {
-                    // Options
-                  },
-                ], */
               },
             },
           },
@@ -195,7 +187,6 @@ const prodConfig=merge(webpackConfig, {
             },
           },
         ],
-        // exclude: /components/,
       },
     ],
   },

@@ -9,16 +9,15 @@ import Icons from '@app/utils/icons';
 import '@common/styles/index.less';
 import '@app/assets/styles.less';
 
-import router from './router';
+import router from '@app/routers/staticRouter';
 
-import setDefStore from './defStore';
+import setDefStore from '@app/utils/defStore';
 setDefStore();
 
 const app=createApp(App);
 
 app.use(ElementPlus);
 Object.keys(Icons).map(key=>app.component([key],Icons[key]));
-// app.use(Icons);
 app.use(router);
 app.mount('#app');
 

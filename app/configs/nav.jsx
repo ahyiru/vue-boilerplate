@@ -28,22 +28,22 @@ export const leftNav=({store})=>{
       Ricon:true,
       children:[
         {
-          name:'智能分析',
+          name:'demo',
           icon:'Operation',
           type:'link',
-          link:'https://v3.cn.vuejs.org/',
+          link:'http://ihuxy.com/',
         },
         {
-          name:'用户洞察',
+          name:'zbxtable',
           icon:'Monitor',
           type:'link',
-          link:'https://v3.cn.vuejs.org/',
+          link:'https://zbx.cactifans.com/',
         },
         {
-          name:'智慧运营',
+          name:'Phoenix UI',
           icon:'DataLine',
           type:'link',
-          link:'https://v3.cn.vuejs.org/',
+          link:'http://ihuxy.com:8088/',
         },
       ],
     },

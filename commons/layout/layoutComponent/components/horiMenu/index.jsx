@@ -1,10 +1,10 @@
 import './index.less';
-const render=(data,fixIcons,Link)=>data.value.map(item=>{
+const render=(data,fixIcons,Link)=>data.map(item=>{
   const {name,path,icon,active,open,children,linkProps}=item;
   const hasChildren=children&&children.length;
   if(hasChildren){
     return <li key={path||name} has-children="true">
-      <Link to={path} className={active?'active':''} preventDefault {...linkProps}>
+      <Link to={path} item={item} /* className={active?'active':''} */ preventDefault {...linkProps}>
         {typeof fixIcons==='function'?fixIcons(icon):icon}
         <span className="txt has-right-icon">{name}</span>
         <i className="coll-ico" />
@@ -13,7 +13,7 @@ const render=(data,fixIcons,Link)=>data.value.map(item=>{
     </li>;
   }
   return <li key={path||name}>
-    <Link to={path} className={active?'active target':''} stopPropagation {...linkProps}>
+    <Link to={path} item={item} /* className={active?'active target':''} */ stopPropagation {...linkProps}>
       {typeof fixIcons==='function'?fixIcons(icon):icon}
       <span className="txt">{name}</span>
     </Link>

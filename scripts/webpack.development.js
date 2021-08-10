@@ -12,7 +12,6 @@ const postcssOptions={
   // autoprefixer: { grid: true }
   browsers: 'last 2 versions',
   importFrom:[
-    // './playground/src/layoutOpt/global.css',
     // './configs/themeCfg.js',
     ()=>{
       const environmentVariables={
@@ -53,18 +52,10 @@ const devConfig=merge(webpackConfig,{
                 plugins:()=>[
                   postcssPresetEnv(postcssOptions),
                 ],
-                /* plugins:[
-                  'postcss-preset-env',
-                  {
-                    // Options
-                  },
-                ], */
               },
             },
           },
         ],
-        // include:[/node_modules/],
-        // exclude:[/node_modules/],
       },
       {
         test:/\.less$/,
@@ -89,12 +80,6 @@ const devConfig=merge(webpackConfig,{
                 plugins:()=>[
                   postcssPresetEnv(postcssOptions),
                 ],
-                /* plugins:[
-                  'postcss-preset-env',
-                  {
-                    // Options
-                  },
-                ], */
               },
             },
           },
@@ -115,27 +100,13 @@ const devConfig=merge(webpackConfig,{
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env':{
-        // NODE_ENV:JSON.stringify('development'),
         isDev:true,
       },
       EMAIL:JSON.stringify('ah.yiru@gmail.com'),
       VERSION:JSON.stringify('0.0.x'),
-      __VUE_OPTIONS_API__: false,
-      __VUE_PROD_DEVTOOLS__: false,
+      // __VUE_OPTIONS_API__: false,
+      // __VUE_PROD_DEVTOOLS__: false,
     }),
-    /*new GenerateSW({
-      // include: [/\.html$/, /\.js$/, /\.css$/],
-      // exclude: '/node_modules/',
-      // swDest: 'service-worker.js',
-      // swDest:path.join(configs.BUILD_DIR, 'js/sw.js'),
-      // navigateFallback: '/index.html', // SPA fallback
-      // globDirectory:configs.BUILD_DIR,
-      // importsDirectory: '/',
-      // importWorkboxFrom: 'local',
-      cacheId: 'demo-pwa',
-      clientsClaim: true,
-      skipWaiting: true,
-    }),*/
   ],
 });
 

@@ -5,8 +5,8 @@ const cors=require('cors');
 const logger=require('morgan');
 const bodyParser=require('body-parser');
 const compression=require('compression');
-const https=require('https');
-const fs=require('fs');
+// const https=require('https');
+// const fs=require('fs');
 
 const app = express();
 
@@ -28,9 +28,7 @@ app.use(bodyParser.json({limit:'20mb'}));
 app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
 app.use(compression());
 
-// const appDist=path.resolve(__dirname,`../${appName}`);
 const build=path.resolve(appName,BUILD_DIR);
-// app.use(express.static(build));
 
 app.use(PRD_ROOT_DIR,express.static(build));
 
