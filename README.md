@@ -66,7 +66,7 @@ const app={
 
 ### 项目目录
 
-- api
+- apis
 - assets
 - components
 - configs
