@@ -10,9 +10,10 @@
 - `stylelint`：样式规范
 - `jest`：单元测试
 - `husky`：代码提交验证
+- `commitlint`：git commit规范
 - `http-proxy`：代理配置
 
-代码规范及commit规范，团队讨论决定，可自行配置。
+代码规范及commit规范，可根据团队讨论决定，自行配置。
 
 可根据需求选取 `loader`、 `plugins`等。
 
@@ -120,7 +121,7 @@ const app={
 
 #### i18n设置
 
-根据项目自行配置 `i18n` 。
+提供i18n配置。可根据项目自行配置 `i18n` 。
 
 #### 组件
 
