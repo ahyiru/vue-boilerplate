@@ -94,6 +94,38 @@ const devConfig=merge(webpackConfig,{
         ],
         // exclude:[/node_modules/],
       },
+      {
+        test:/\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader:'css-loader',
+            options:{
+              importLoaders:2,
+              modules:{
+                mode:'global',
+                localIdentName:'[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader:'sass-loader',
+            options:{
+              implementation: require('sass'),
+              sassOptions:{
+                indentWidth:2,
+              },
+              additionalData:(content, loaderContext) =>{
+                if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
+                  return content;
+                }
+                return `@import '~@app/styles/index.scss';`;
+              },
+            },
+          },
+        ],
+        // exclude:[/node_modules/],
+      },
     ],
   },
   plugins:[

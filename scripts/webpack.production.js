@@ -188,6 +188,43 @@ const prodConfig=merge(webpackConfig, {
           },
         ],
       },
+      {
+        test:/\.s[ac]ss$/i,
+        use: [
+          {
+            loader:MiniCssExtractPlugin.loader,
+            options:{
+              // publicPath: '../',
+            },
+          },
+          {
+            loader:'css-loader',
+            options:{
+              importLoaders:2,
+              modules:{
+                mode:'global',
+                localIdentName:'[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader:'sass-loader',
+            options:{
+              implementation: require('sass'),
+              sassOptions:{
+                indentWidth:2,
+              },
+              additionalData:(content, loaderContext) =>{
+                if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
+                  return content;
+                }
+                return `@import '~@app/styles/index.scss';`;
+              },
+            },
+          },
+        ],
+        // exclude:[/node_modules/],
+      },
     ],
   },
   plugins,

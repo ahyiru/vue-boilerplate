@@ -5,11 +5,11 @@ const theme=[
   },
   {
     key:'--menuWidth',
-    value:'180px',
+    value:'200px',
   },
   {
     key:'--collapseWidth',
-    value:'56px',
+    value:'60px',
   },
   {
     key:'--collapseMenuWidth',
@@ -17,7 +17,7 @@ const theme=[
   },
   {
     key:'--headerHeight',
-    value:'52px',
+    value:'56px',
   },
   {
     key:'--footerHeight',

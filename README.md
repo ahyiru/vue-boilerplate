@@ -1,6 +1,6 @@
 ## vue-boilerplate
 
-基于 `webpack` 搭建的项目脚手架。
+基于 `webpack` 搭建的项目脚手架。使用 `vue3`框架，支持 `jsx `和 `vue` 模版语法。
 
 ### 工程
 

@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 
-const {appName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,publicPath}=require('../configs');
+const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,publicPath}=require('../configs');
 
 const publics=path.resolve(__dirname,PUBLIC_DIR);
 const app=path.resolve(__dirname,`../${appName}`);
@@ -27,7 +27,7 @@ const templ=path.resolve(publics,'index.html');
 const icon=path.resolve(publics,'favicon.png');
 
 const htmlPlugin=()=>new HtmlWebpackPlugin({
-  title:appName,
+  title:projectName||appName,
   template:templ,
   favicon:icon,
   inject:true,
@@ -264,6 +264,10 @@ module.exports={
       // 'vue$':'vue/dist/vue.esm-bundler.js',
     },
     extensions:['.js','.mjs','.cjs','.jsx','.ts','.tsx','.json','.css','.less','.vue'],
+    fallback: {
+      path: false,
+      process: false,
+    },
   },
   module:{
     rules:rules,

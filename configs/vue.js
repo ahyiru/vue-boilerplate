@@ -7,7 +7,7 @@ const app={
   PUBLIC_DIR:'../public',
   DEV_ROOT_DIR:'',
   PRD_ROOT_DIR:'/',
-  PROXY_URL:'http://47.105.94.51:9202',
+  PROXY_URL:'http://localhost:9202',
   MOCK:'http://localhost:7502',
   SERVER_PORT:7502,
   basepath:'/',
