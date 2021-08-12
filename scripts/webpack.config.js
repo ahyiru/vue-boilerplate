@@ -10,15 +10,6 @@ const app=path.resolve(__dirname,`../${appName}`);
 
 // const rootDir=DEV_ROOT_DIR==='/'?DEV_ROOT_DIR:`${DEV_ROOT_DIR}/`;
 
-const frameChunks={
-  vue:{
-    idHint:'vue',
-    test: /[\\/]node_modules[\\/](vue|vue-router)[\\/]/,
-    enforce:true,
-    priority:15,
-  },
-};
-
 const entry={
   app:[path.resolve(app,'index.js')],
   vue:['vue'],
@@ -80,49 +71,17 @@ const plugins=[
 
 const rules=[
   {
-    test:/\.m?js/,
-    resolve:{
-      fullySpecified:false,
-    },
-  },
-  {
     test: /\.vue$/,
     loader:'vue-loader',
     exclude:/node_modules/,
   },
   {
-    test:/\.(js|jsx)$/,
+    test:/\.jsx?$/,
     loader:'babel-loader',
-    exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
-  },
-  {
-    test:/\.tsx?$/,
-    use:[
-      {loader:'babel-loader'},
-      {loader:'ts-loader'},
-    ],
-    exclude:[/node_modules/,/draft/],
-  },
-  {
-    test: /\.html$/,
-    use: {
-      loader: 'html-loader',
-      options: {
-        minimize:true,
-      },
+    options:{
+      cacheDirectory:true,
     },
-    include:[app],
-  },
-  {
-    test:/\.md$/,
-    use:[
-      {
-        loader:'html-loader',
-        options:{
-          minimize:false,
-        },
-      },
-    ],
+    exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
   },
   {
     test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)/i,
@@ -143,35 +102,20 @@ const rules=[
       limit:20480,
       name:'fonts/[hash:8].[ext]',
       publicPath:'../',
+      esModule:false,
     },
     exclude:[/images/],
-  },
-  {
-    test:/\.pdf/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'pdf/[hash].[ext]',
-    },
-  },
-  {
-    test:/\.(swf|xap|mp4|webm)/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'video/[hash].[ext]',
-    },
   },
 ];
 
 module.exports={
   context:app,
-  /* cache: {
+  cache: {
     type: 'filesystem',
     buildDependencies: {
       config: [ __filename ],
     },
-  }, */
+  },
   experiments:{
     topLevelAwait:true,
     // outputModule:true,
@@ -184,8 +128,8 @@ module.exports={
   output:{
     path:path.resolve(app,BUILD_DIR),
     publicPath,
-    filename:'js/[name]_[contenthash:8].js',
-    chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
+    filename:'js/[name].js',
+    // chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
     // assetModuleFilename: 'assets/[contenthash][ext]',
     /* library:{
       name:`${appName}App`,
@@ -196,12 +140,12 @@ module.exports={
     // globalObject:'this',
   },
   optimization:{
-    minimize:true,
+    // minimize:true,
     concatenateModules:false,
     usedExports:false,
     sideEffects:false,
-
-    splitChunks:{
+    splitChunks:false,
+    /* splitChunks:{
       chunks:'all',//'async','initial'
       // minSize:0,
       minSize:{
@@ -243,8 +187,8 @@ module.exports={
           },
         },
       },
-    },
-    // runtimeChunk:true,
+    }, */
+    runtimeChunk:'single',
     moduleIds:'deterministic',
     chunkIds:'named',
   },
@@ -263,11 +207,13 @@ module.exports={
       '@common':path.resolve(__dirname, '../commons'),
       // 'vue$':'vue/dist/vue.esm-bundler.js',
     },
-    extensions:['.js','.mjs','.cjs','.jsx','.ts','.tsx','.json','.css','.less','.vue'],
+    extensions:['.jsx','.js','.less','.css','.json','.ts','.tsx','.vue','.mjs'],
     fallback: {
-      path: false,
+      path: false,//require.resolve('path-browserify'),
       process: false,
     },
+    symlinks:false,
+    cacheWithContext:false,
   },
   module:{
     rules:rules,

@@ -7,8 +7,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const rimraf = require('rimraf');
 
-const CompressionPlugin = require('compression-webpack-plugin');
-
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 const {GenerateSW}=require('workbox-webpack-plugin');
@@ -40,6 +38,15 @@ const postcssOptions={
       return {environmentVariables};
     },
   ],
+};
+
+const frameChunks={
+  vue:{
+    idHint:'vue',
+    test: /[\\/]node_modules[\\/](vue|vue-router)[\\/]/,
+    enforce:true,
+    priority:15,
+  },
 };
 
 const plugins=[
@@ -83,6 +90,8 @@ const prodConfig=merge(webpackConfig, {
   output:{
     path:build,
     publicPath:rootDir,
+    filename:'js/[name]_[contenthash:8].js',
+    chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
   },
   optimization:{
     minimize:true,
@@ -111,6 +120,49 @@ const prodConfig=merge(webpackConfig, {
         },
       }),
     ],
+    splitChunks:{
+      chunks:'all',//'async','initial'
+      // minSize:0,
+      minSize:{
+        javascript:8000,
+        style:8000,
+      },
+      maxSize:{
+        javascript:1000000,
+        style:1000000,
+      },
+      minChunks:2,
+      maxInitialRequests:10,
+      maxAsyncRequests:10,
+      // automaticNameDelimiter: '~',
+      cacheGroups:{
+        commons:{
+          // chunks:'initial',
+          // minSize:30000,
+          idHint:'commons',
+          test:app,
+          priority: 5,
+          reuseExistingChunk:true,
+        },
+        defaultVendors:{
+          // chunks:'initial',
+          idHint:'vendors',
+          test:/[\\/]node_modules[\\/]/,
+          enforce:true,
+          priority:10,
+        },
+        ...frameChunks,
+        echarts: {
+          idHint:'echarts',
+          chunks:'all',
+          priority:20,
+          test: function(module){
+            const context = module.context;
+            return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
+          },
+        },
+      },
+    },
   },
   module:{
     rules:[
@@ -201,10 +253,6 @@ const prodConfig=merge(webpackConfig, {
             loader:'css-loader',
             options:{
               importLoaders:2,
-              modules:{
-                mode:'global',
-                localIdentName:'[path][name]__[local]--[hash:base64:5]',
-              },
             },
           },
           {
@@ -214,16 +262,16 @@ const prodConfig=merge(webpackConfig, {
               sassOptions:{
                 indentWidth:2,
               },
-              additionalData:(content, loaderContext) =>{
+              /* additionalData:(content, loaderContext) =>{
                 if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
                   return content;
                 }
-                return `@import '~@app/styles/index.scss';`;
-              },
+                return `@import '~@app/styles/index.scss';${content};`;
+              }, */
             },
           },
         ],
-        // exclude:[/node_modules/],
+        exclude:[/node_modules/],
       },
     ],
   },

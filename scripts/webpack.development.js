@@ -25,7 +25,7 @@ const postcssOptions={
 const devConfig=merge(webpackConfig,{
   mode:'development',
   devtool:'eval-cheap-module-source-map',
-  // target:'web',
+  target:'web',
   entry:{
     app:['webpack-hot-middleware/client?reload=true'],
   },
@@ -102,10 +102,6 @@ const devConfig=merge(webpackConfig,{
             loader:'css-loader',
             options:{
               importLoaders:2,
-              modules:{
-                mode:'global',
-                localIdentName:'[path][name]__[local]--[hash:base64:5]',
-              },
             },
           },
           {
@@ -115,16 +111,16 @@ const devConfig=merge(webpackConfig,{
               sassOptions:{
                 indentWidth:2,
               },
-              additionalData:(content, loaderContext) =>{
+              /* additionalData:(content, loaderContext) =>{
                 if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
                   return content;
                 }
-                return `@import '~@app/styles/index.scss';`;
-              },
+                return `@import '~@/appstyles/index.scss';${content};`;
+              }, */
             },
           },
         ],
-        // exclude:[/node_modules/],
+        exclude:[/node_modules/],
       },
     ],
   },

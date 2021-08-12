@@ -1,5 +1,6 @@
 <template>
   <div class="page-panel">
+    <!-- <h2>scss test</h2> -->
     <el-table
       :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
       style="width: 100%">
@@ -73,6 +74,13 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.page-panel {
+  h2{
+    color:red;
+  }
+}
+</style>
 <style scoped>
 .page-panel {
   background:#fff;
