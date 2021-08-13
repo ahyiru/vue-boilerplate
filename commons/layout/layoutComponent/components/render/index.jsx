@@ -44,7 +44,7 @@ export const renderCollapsed=(data,menuRef,fixIcons,Link,level=0)=>data.map(item
     </li>;
   }
   return <li key={path||name}>
-    <Link to={path} item={item} /* className={active?'active target':''} */ stopPropagation {...linkProps}>
+    <Link to={path} item={item} /* className={active?'active target':''} */ stopPropagation {...linkProps} title={name}>
       {typeof fixIcons==='function'?fixIcons(icon):icon}
       <span className="txt">{name}</span>
     </Link>

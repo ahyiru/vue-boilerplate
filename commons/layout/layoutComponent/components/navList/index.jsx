@@ -42,7 +42,7 @@ const setupNavItem=({item,click,store,useStore,fixIcons})=>{
         }
       </ul>
     </li>:<li>
-      <a onClick={e=>itemClick(e,item)} className={active?'active':''}>{itemEl}</a>
+      <a onClick={e=>itemClick(e,item)} className={active?'active':''} title={item.title||name}>{itemEl}</a>
     </li>;
   };
 };
