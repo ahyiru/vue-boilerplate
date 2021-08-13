@@ -115,7 +115,7 @@ const devConfig=merge(webpackConfig,{
                 if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
                   return content;
                 }
-                return `@import '~@/appstyles/index.scss';${content};`;
+                return `@import '~@app/styles/index.scss';${content};`;
               }, */
             },
           },

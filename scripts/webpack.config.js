@@ -145,49 +145,6 @@ module.exports={
     usedExports:false,
     sideEffects:false,
     splitChunks:false,
-    /* splitChunks:{
-      chunks:'all',//'async','initial'
-      // minSize:0,
-      minSize:{
-        javascript:8000,
-        style:8000,
-      },
-      maxSize:{
-        javascript:1000000,
-        style:1000000,
-      },
-      minChunks:2,
-      maxInitialRequests:10,
-      maxAsyncRequests:10,
-      // automaticNameDelimiter: '~',
-      cacheGroups:{
-        commons:{
-          // chunks:'initial',
-          // minSize:30000,
-          idHint:'commons',
-          test:app,
-          priority: 5,
-          reuseExistingChunk:true,
-        },
-        defaultVendors:{
-          // chunks:'initial',
-          idHint:'vendors',
-          test:/[\\/]node_modules[\\/]/,
-          enforce:true,
-          priority:10,
-        },
-        ...frameChunks,
-        echarts: {
-          idHint:'echarts',
-          chunks:'all',
-          priority:20,
-          test: function(module){
-            const context = module.context;
-            return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
-          },
-        },
-      },
-    }, */
     runtimeChunk:'single',
     moduleIds:'deterministic',
     chunkIds:'named',
@@ -207,7 +164,7 @@ module.exports={
       '@common':path.resolve(__dirname, '../commons'),
       // 'vue$':'vue/dist/vue.esm-bundler.js',
     },
-    extensions:['.jsx','.js','.less','.css','.json','.ts','.tsx','.vue','.mjs'],
+    extensions:['.vue','.jsx','.js','.scss','.less','.css','.json','.ts','.tsx','.mjs'],
     fallback: {
       path: false,//require.resolve('path-browserify'),
       process: false,
