@@ -62,13 +62,13 @@ app.listen(app.get('port'),err=>{
     return false;
   }
   const ips=getIPs().map(ip=>`${ip}:${app.get('port')}`).join('\n');
-  console.log('\n'+appName.magenta+': 服务已启动! '.black+'✓'.green);
+  console.log('\n'+appName.magenta+': 服务已启动! '.cyan+'✓'.green);
   console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...`.cyan);
-  console.log('-----------------------------------'.grey);
+  console.log('-----------------------------------'.blue);
   console.log(`运行地址: \n`.magenta);
   console.log(`${ips} \n`.magenta);
-  console.log(`如需打包部署到生产环境，请运行 `.black+`npm run build`.cyan);
-  console.log('-----------------------------------'.grey);
+  console.log(`如需打包部署到生产环境，请运行 `.cyan+`npm run build`.green);
+  console.log('-----------------------------------'.blue);
   console.log('\n按下 CTRL-C 停止服务\n'.blue);
 });
 
