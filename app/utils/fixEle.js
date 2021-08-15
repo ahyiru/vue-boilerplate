@@ -4,7 +4,7 @@ const fixEle=list=>Value=>{
   }
   if(typeof Value==='string'){
     const Comp=list?.[Value];
-    return Comp?<el-icon><Comp /></el-icon>:<i className={Value} />/* <i>{Value}</i> */;
+    return Comp?<el-icon><Comp key={Value} /></el-icon>:<i className={Value} />/* <i>{Value}</i> */;
   }
   return Value||null;
 };

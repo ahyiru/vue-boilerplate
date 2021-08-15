@@ -1,11 +1,11 @@
 const app={
-  HOST:process.env.IP||'localhost',
+  HOST:process.env.IP||'http://localhost',
   PORT:process.env.PORT||8900,
   PRO_PORT:process.env.PRO_PORT||8901,
   BUILD_DIR:'./build',//'build',
   // DIST:'../build',
   PUBLIC_DIR:'../public',
-  DEV_ROOT_DIR:'',
+  DEV_ROOT_DIR:'/',
   PRD_ROOT_DIR:'/',
   PROXY_URL:'http://localhost:9202',
   TARGET:'/api',

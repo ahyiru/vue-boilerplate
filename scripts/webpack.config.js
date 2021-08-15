@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
-
-const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,publicPath}=require('../configs');
+const OpenBrowserWebpackPlugin = require('@huxy/open-browser-webpack-plugin');
+const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,HOST,PORT}=require('../configs');
 
 const publics=path.resolve(__dirname,PUBLIC_DIR);
 const app=path.resolve(__dirname,`../${appName}`);
@@ -67,6 +67,7 @@ const plugins=[
     percentBy:null,
   }),
   new VueLoaderPlugin(),
+  new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
 ];
 
 const rules=[
@@ -84,7 +85,7 @@ const rules=[
     exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
   },
   {
-    test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)/i,
+    test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
     loader:'url-loader',
     options:{
       limit:20480,
@@ -96,7 +97,7 @@ const rules=[
     exclude:[/node_modules/],
   },
   {
-    test:/\.(ttf|eot|svg|woff|woff2|otf)/,
+    test:/\.(ttf|eot|svg|woff|woff2|otf)$/,
     loader:'url-loader',
     options:{
       limit:20480,
@@ -127,7 +128,7 @@ module.exports={
   entry:entry,
   output:{
     path:path.resolve(app,BUILD_DIR),
-    publicPath,
+    publicPath:DEV_ROOT_DIR,
     filename:'js/[name].js',
     // chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
     // assetModuleFilename: 'assets/[contenthash][ext]',
