@@ -14,11 +14,11 @@ const Index=props=>{
         {
           navMenu?.length?<HoriMenu menu={navMenu.slice(0,5)} fixIcons={fixIcons} style={navMenuStyle} Link={Link} />:
             <div className="nav-left">
-              <NavList list={leftList} click={item=>handleNavClick(props,item)} store={store} useStore={useStore} fixIcons={fixIcons}  />
+              <NavList list={leftList} click={(item,e)=>handleNavClick(props,item,e)} store={store} useStore={useStore} fixIcons={fixIcons}  />
             </div>
         }
         <div className="nav-right">
-          <NavList list={rightList} click={item=>handleNavClick(props,item)} store={store} useStore={useStore} fixIcons={fixIcons}  />
+          <NavList list={rightList} click={(item,e)=>handleNavClick(props,item,e)} store={store} useStore={useStore} fixIcons={fixIcons}  />
         </div>
       </div>
     </div>

@@ -12,11 +12,11 @@ const setupNavItem=({item,click,store,useStore,fixIcons})=>{
   const toggleNav=(e,item)=>{
     // e.stopPropagation();
     open.value=!open.value;
-    click(item);
+    click(e,item);
   };
   const itemClick=(e,item,isChild=false)=>{
     open.value=false;
-    click(item,isChild);
+    click(e,item,isChild);
   };
   return ()=>{
     const ri=Ricon===true?<i className={`huxy-angle-${open.value?'top':'bt'}`} />:(Ricon?<Ricon status={open} />:null);
@@ -69,11 +69,11 @@ const Index=({list,click,store,useStore,fixIcons})=>{
     })(list.value);
     list.value=newData;
   };
-  const handleClick=(item,update)=>{
+  const handleClick=(e,item,update)=>{
     if(update){
       updateList(item);
     }
-    click(item);
+    click(item,e);
   };
   return <ul>
     {
