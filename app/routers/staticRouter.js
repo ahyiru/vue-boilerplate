@@ -17,6 +17,12 @@ export const routes = [
         component:()=>import('@app/views/table'),
       },
       {
+        path: '/comp-table',
+        name:'comp-table',
+        icon:'ChatLineSquare',
+        component:()=>import('@app/views/test'),
+      },
+      {
         path: '/tree',
         name:'tree',
         icon:'Dessert',

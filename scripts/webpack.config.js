@@ -74,6 +74,9 @@ const rules=[
   {
     test: /\.vue$/,
     loader:'vue-loader',
+    options:{
+      refSugar: true,
+    },
     exclude:/node_modules/,
   },
   {

@@ -8,10 +8,11 @@ import './index.less';
 const Index=props=>{
   const {store,useStore,menu,MenuTop,menuStyle,fixIcons,Link}=props;
   const [collapsed,setCollapsed]=useStore(store,'huxy-collapse');
-  const {width}=useWinResize().value;
+  // const {width}=useWinResize().value;
+  const viewSize=useWinResize();
   const menuRef=ref();
   useClickAway(menuRef,e=>{
-    if(width<1024&&collapsed.value){
+    if(viewSize.value.width<1024&&collapsed.value){
       setCollapsed(false);
     }
   });
@@ -25,7 +26,7 @@ const Index=props=>{
       {MenuTop&&<MenuTop {...props} />}
       <div className="menu-track">
         <ul className="tree-root">
-          {width>1024&&collapsed.value?renderCollapsed(menu,menuRef,fixIcons,Link):render(menu,toggle,fixIcons,Link)}
+          {viewSize.value.width>1024&&collapsed.value?renderCollapsed(menu,menuRef,fixIcons,Link):render(menu,toggle,fixIcons,Link)}
         </ul>
       </div>
     </div>;

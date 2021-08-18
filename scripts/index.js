@@ -55,7 +55,6 @@ app.get('*',(req,res)=>{
   res.send(htmlBuffer.toString());
 });
 
-
 app.listen(app.get('port'),err=>{
   if(err){
     console.log(err);
